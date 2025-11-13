@@ -184,6 +184,8 @@ dcbikeshare %>%
   theme_minimal()
 ```
 
+**Interpretation:** The visualization shows a clear positive relationship between feeling temperature and bike rentals in DC during 2011 and 2012. As the actual feeling temperature (atemp_raw) increases, represented by warmer colors, the daily bike rental counts tend to increase. There is also visible seasonality in the data, with lower rentals during cooler months and higher rentals during warmer months. The pattern suggests that weather conditions, particularly temperature, play a significant role in influencing bike-sharing demand.
+
 8.  Create a visualization displaying the relationship between bike rentals and season. Interpret the plot in context of the data.
 
 ```{r exercise-8, fig.fullwidth = TRUE}
