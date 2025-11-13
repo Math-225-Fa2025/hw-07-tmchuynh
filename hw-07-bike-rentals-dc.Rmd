@@ -131,9 +131,37 @@ head(dcbikeshare$weathersit)
 5.  Calculate raw temperature, feeling temperature, humidity, and windspeed as their values given in the dataset multiplied by the maximum raw values stated in the codebook for each variable.
     Instead of writing over the existing variables, create new ones with concise but informative names.
 
+```{r exercise-5}
+# According to the codebook:
+# temp: normalized feeling temperature (0 to 50 degrees Celsius)
+# atemp: normalized actual temperature (0 to 50 degrees Celsius)  
+# hum: normalized humidity (0 to 100%)
+# windspeed: normalized wind speed (0 to 67 km/h)
+
+dcbikeshare <- dcbikeshare %>%
+  mutate(temp_raw = temp * 50,
+         atemp_raw = atemp * 50,
+         humidity_raw = hum * 100,
+         windspeed_raw = windspeed * 67)
+
+# Verify the calculations
+head(select(dcbikeshare, temp, temp_raw, atemp, atemp_raw, hum, humidity_raw, windspeed, windspeed_raw))
+```
+
 6.  Check that the sum of `casual` and `registered` adds up to `cnt` for each record.
     **Hint:** One way of doing this is to create a new column that takes on the value `TRUE` if they add up and `FALSE` if not, and then checking if all values in that column are `TRUE`s.
     But this is only one way, you might come up with another.
+
+```{r exercise-6}
+dcbikeshare <- dcbikeshare %>%
+  mutate(sum_check = casual + registered == cnt)
+
+# Verify all records sum correctly
+all(dcbikeshare$sum_check)
+
+# Check a few records
+head(select(dcbikeshare, casual, registered, cnt, sum_check))
+```
 
 Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
@@ -157,6 +185,22 @@ dcbikeshare %>%
 ```
 
 8.  Create a visualization displaying the relationship between bike rentals and season. Interpret the plot in context of the data.
+
+```{r exercise-8, fig.fullwidth = TRUE}
+dcbikeshare %>%
+  ggplot(mapping = aes(x = season, y = cnt, fill = season)) +
+    geom_boxplot(alpha = 0.7) +
+    labs(
+      title = "Bike rentals in DC by season",
+      x = "Season",
+      y = "Daily bike rentals",
+      fill = "Season"
+    ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+**Interpretation:** Bike rental demand varies substantially by season. Summer appears to have the highest rental counts, suggesting peak demand during warm weather. Spring and Fall show moderate rental activity, while Winter has the lowest rental counts. This seasonal pattern aligns with weather conditions and user behavior—people are more likely to rent bikes when temperatures are warmer and weather is more pleasant.
 
 Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards.*
 
