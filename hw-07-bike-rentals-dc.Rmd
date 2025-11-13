@@ -332,4 +332,36 @@ Note: The actual intercept values should be interpreted cautiously since some pr
 
 15. According to this model, assuming everything else is the same, in which season does the model predict total daily bike rentals to be highest and which to be the lowest?
 
+```{r exercise-15}
+# Extract season coefficients
+season_coef <- coef_summary[grepl("season", names(coef_summary))]
+intercept_value <- coef_summary[1]
+
+cat("Season coefficients (relative to Spring baseline):\n")
+cat("Spring (baseline):", 0, "\n")
+for (i in seq_along(season_coef)) {
+  cat(names(season_coef)[i], ":", season_coef[i], "\n")
+}
+
+# Calculate predicted values for each season (with other predictors at reference levels)
+cat("\nPredicted bike rentals by season (other predictors at reference levels):\n")
+cat("Spring:", intercept_value, "\n")
+cat("Summer:", intercept_value + season_coef["seasonSummer"], "\n")
+cat("Fall:", intercept_value + season_coef["seasonFall"], "\n")
+cat("Winter:", intercept_value + season_coef["seasonWinter"], "\n")
+
+# Find max and min
+season_predictions <- c(
+  "Spring" = intercept_value,
+  "Summer" = intercept_value + season_coef["seasonSummer"],
+  "Fall" = intercept_value + season_coef["seasonFall"],
+  "Winter" = intercept_value + season_coef["seasonWinter"]
+)
+
+cat("\nHighest predicted rentals:", names(which.max(season_predictions)), "\n")
+cat("Lowest predicted rentals:", names(which.min(season_predictions)), "\n")
+```
+
+**Answer:** According to the model, assuming all other variables are held constant at their reference levels, **Summer** is predicted to have the highest total daily bike rentals, while **Winter** is predicted to have the lowest. This aligns with the exploratory data analysis showing strong seasonal effects, with warm seasons promoting higher bike rental demand and cold seasons reducing demand.
+
 Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
