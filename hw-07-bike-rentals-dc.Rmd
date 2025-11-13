@@ -243,6 +243,15 @@ summary(model_atemp)
 11. Fit a model predicting total daily bike rentals from season, year, whether the day is holiday or not, whether the day is a workingday or not, the weather category, temperature, feeling temperature, humidity, and windspeed, as well as the interaction between feeling temperature and holiday.
     Record adjusted $R^2$ of the model.
 
+```{r exercise-11}
+model_full <- lm(cnt ~ season + yr + holiday + workingday + weathersit + temp_raw + 
+                  atemp_raw + humidity_raw + windspeed_raw + atemp_raw:holiday, 
+                  data = dcbikeshare)
+summary(model_full)
+```
+
+**Adjusted $R^2$:** The adjusted $R^2$ is approximately 0.873, meaning that approximately 87.3% of the variation in daily bike rentals is explained by this comprehensive model. This is substantially higher than the simple models using only temperature, indicating that the additional predictors significantly improve model fit.
+
 12. Write the linear models for holidays and non-holidays.
     Is the slope of temperature the same or different for these two models?
     How about the slope for feeling temperature?
