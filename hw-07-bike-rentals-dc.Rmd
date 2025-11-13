@@ -312,6 +312,24 @@ This suggests that on holidays, people's bike rental decisions may be less sensi
 14. Interpret the intercept.
     If the intercept is different for holidays and non-holidays, make sure to interpret both.
 
+```{r exercise-14}
+# Identify intercept and holiday coefficient
+intercept <- coef_summary[1]
+holiday_coef <- coef_summary["holidayyes"]
+
+cat("Intercept (reference level: non-holiday, Spring, 2011, not a working day, clear weather, other predictors at 0):",
+    intercept, "\n")
+cat("\nHoliday adjustment:", holiday_coef, "\n")
+cat("\nIntercept for non-holidays:", intercept, "\n")
+cat("Intercept for holidays:", intercept + holiday_coef, "\n")
+```
+
+**Interpretation:**
+- **Non-holiday intercept:** When all predictors are at their reference levels (Spring, 2011, no holiday, not a working day, clear weather, and all raw temperature/humidity/windspeed values at 0), bike rentals are predicted to be approximately the intercept value.
+- **Holiday intercept:** On holidays with the same reference conditions, the intercept adjusts by the `holiday` coefficient. If positive, holidays have higher base rentals; if negative, lower base rentals.
+
+Note: The actual intercept values should be interpreted cautiously since some predictor combinations (like all temperature/humidity/windspeed at 0) are unrealistic. The intercept primarily serves to anchor the model's predicted values.
+
 15. According to this model, assuming everything else is the same, in which season does the model predict total daily bike rentals to be highest and which to be the lowest?
 
 Knit, *commit, and push your changes to GitHub with an appropriate commit message. Make sure to commit and push all changed files so that your Git pane is cleared up afterwards and review the md document on GitHub to make sure you're happy with the final state of your work.*
