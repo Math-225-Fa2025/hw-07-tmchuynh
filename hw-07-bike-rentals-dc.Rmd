@@ -184,6 +184,20 @@ dcbikeshare %>%
   theme_minimal()
 ```
 
+```{r exercise-7, fig.fullwidth = TRUE}
+dcbikeshare %>%
+  ggplot(mapping = aes(x = dteday, y = cnt, color = atemp_raw)) +
+    geom_point(alpha = 0.7) +
+    labs(
+      title = "Bike rentals in DC, 2011 and 2012",
+      subtitle = "Warmer temperatures associated with more bike rentals",
+      x = "Date",
+      y = "Bike rentals",
+      color = "Temperature (C)"
+    ) +
+  theme_minimal()
+```
+
 **Interpretation:** The visualization shows a clear positive relationship between feeling temperature and bike rentals in DC during 2011 and 2012. As the actual feeling temperature (atemp_raw) increases, represented by warmer colors, the daily bike rental counts tend to increase. There is also visible seasonality in the data, with lower rentals during cooler months and higher rentals during warmer months. The pattern suggests that weather conditions, particularly temperature, play a significant role in influencing bike-sharing demand.
 
 8.  Create a visualization displaying the relationship between bike rentals and season. Interpret the plot in context of the data.
