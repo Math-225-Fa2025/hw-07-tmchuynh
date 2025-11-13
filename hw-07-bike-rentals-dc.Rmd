@@ -209,6 +209,18 @@ Knit, *commit, and push your changes to GitHub with an appropriate commit messag
 9.  Fit a linear model predicting total daily bike rentals from daily temperature.
     Write the linear model, interpret the slope and the intercept in context of the data, and determine and interpret the $R^2$.
 
+```{r exercise-9}
+model_temp <- lm(cnt ~ temp_raw, data = dcbikeshare)
+summary(model_temp)
+```
+
+**Model:** $\widehat{cnt} = 1214.63 + 60.65 \times temp\_raw$
+
+**Interpretation:**
+- **Intercept (1214.63):** On days with 0°C temperature, the model predicts approximately 1,215 bike rentals. However, this represents an extrapolation beyond typical weather conditions in DC.
+- **Slope (60.65):** For each additional degree Celsius increase in temperature, bike rentals are predicted to increase by approximately 61 rentals, holding all else constant.
+- **$R^2$ (0.326):** Approximately 32.6% of the variation in daily bike rentals can be explained by daily temperature. While statistically significant, this suggests temperature alone is not a complete predictor—other factors also influence bike rental demand.
+
 10. Fit another linear model predicting total daily bike rentals from daily feeling temperature.
     Write the linear model, interpret the slope and the intercept in context of the data, and determine and interpret the $R^2$.
     Is temperature or feeling temperature a better predictor of bike rentals?
