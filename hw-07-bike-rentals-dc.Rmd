@@ -289,6 +289,26 @@ cat("Holiday model:",
     If the slopes are different for holidays and non-holidays, make sure to interpret both.
     If the variable has multiple levels, make sure you interpret all of the slope coefficients associated with it.
 
+```{r exercise-13}
+# Extract and display coefficients
+coef_df <- data.frame(Coefficient = names(coef_summary), Value = as.numeric(coef_summary))
+print(coef_df)
+```
+
+**Season interpretation:**
+Since Spring is the baseline level, the season coefficients represent differences relative to Spring:
+- **Season Summer:** Adjusts bike rentals by the coefficient (positive values indicate more rentals than Spring)
+- **Season Fall:** Adjusts bike rentals by the coefficient relative to Spring
+- **Season Winter:** Adjusts bike rentals by the coefficient relative to Spring
+
+For example, if Summer coefficient is +500, it means that Summer days are predicted to have approximately 500 more bike rentals than Spring days, holding all other variables constant.
+
+**Feeling temperature interpretation:**
+- **Non-holiday:** The slope coefficient for `atemp_raw` represents the predicted change in bike rentals for each additional degree Celsius of feeling temperature on regular days.
+- **Holiday:** The slope is modified by the interaction term. The total effect is `coef(atemp_raw) + coef(atemp_raw:holidayyes)`. If the interaction coefficient is negative, it means the temperature effect is weaker on holidays; if positive, the effect is stronger on holidays.
+
+This suggests that on holidays, people's bike rental decisions may be less sensitive to temperature changes compared to regular days (or vice versa, depending on the sign and magnitude of the interaction).
+
 14. Interpret the intercept.
     If the intercept is different for holidays and non-holidays, make sure to interpret both.
 
