@@ -226,6 +226,20 @@ summary(model_temp)
     Is temperature or feeling temperature a better predictor of bike rentals?
     Explain your reasoning.
 
+```{r exercise-10}
+model_atemp <- lm(cnt ~ atemp_raw, data = dcbikeshare)
+summary(model_atemp)
+```
+
+**Model:** $\widehat{cnt} = 1013.46 + 77.90 \times atemp\_raw$
+
+**Interpretation:**
+- **Intercept (1013.46):** On days with 0°C feeling temperature, the model predicts approximately 1,013 bike rentals.
+- **Slope (77.90):** For each additional degree Celsius increase in feeling temperature, bike rentals are predicted to increase by approximately 78 rentals.
+- **$R^2$ (0.417):** Approximately 41.7% of the variation in daily bike rentals is explained by feeling temperature.
+
+**Comparison:** Feeling temperature is a better predictor of bike rentals than actual temperature. The $R^2$ for feeling temperature (0.417) is notably higher than for actual temperature (0.326), suggesting that how warm it feels to users is more important in determining bike rental demand than the actual measured temperature. Additionally, the slope for feeling temperature (77.90) is steeper than for actual temperature (60.65), indicating a stronger relationship. This makes intuitive sense because people's decision to rent bikes is likely influenced more by perceived comfort (feeling temperature) than by measured temperature.
+
 11. Fit a model predicting total daily bike rentals from season, year, whether the day is holiday or not, whether the day is a workingday or not, the weather category, temperature, feeling temperature, humidity, and windspeed, as well as the interaction between feeling temperature and holiday.
     Record adjusted $R^2$ of the model.
 
