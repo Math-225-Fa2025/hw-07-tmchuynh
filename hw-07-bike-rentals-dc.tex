@@ -210,6 +210,11 @@ weather information on these days. The original data sources are
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## [1] Spring Spring Spring Spring Spring Spring
+## Levels: Spring Summer Fall Winter
+\end{verbatim}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{1}
@@ -232,9 +237,24 @@ weather information on these days. The original data sources are
 
 \CommentTok{\# Verify the recoding}
 \FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{holiday)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] no no no no no no
+## Levels: no yes
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{workingday)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## [1] no  no  yes yes yes yes
+## Levels: no yes
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -257,6 +277,11 @@ weather information on these days. The original data sources are
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## [1] 2011 2011 2011 2011 2011 2011
+## Levels: 2011 2012
+\end{verbatim}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{3}
@@ -278,6 +303,11 @@ weather information on these days. The original data sources are
 \FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{weathersit)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## [1] Mist  Mist  Clear Clear Clear Clear
+## Levels: Clear Mist Light precipitation Heavy precipitation
+\end{verbatim}
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -310,6 +340,18 @@ weather information on these days. The original data sources are
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## # A tibble: 6 x 8
+##    temp temp_raw atemp atemp_raw   hum humidity_raw windspeed windspeed_raw
+##   <dbl>    <dbl> <dbl>     <dbl> <dbl>        <dbl>     <dbl>         <dbl>
+## 1 0.344    17.2  0.364     18.2  0.806         80.6    0.160          10.7 
+## 2 0.363    18.2  0.354     17.7  0.696         69.6    0.249          16.7 
+## 3 0.196     9.82 0.189      9.47 0.437         43.7    0.248          16.6 
+## 4 0.2      10    0.212     10.6  0.590         59.0    0.160          10.7 
+## 5 0.227    11.3  0.229     11.5  0.437         43.7    0.187          12.5 
+## 6 0.204    10.2  0.233     11.7  0.518         51.8    0.0896          6.00
+\end{verbatim}
+
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \setcounter{enumi}{5}
@@ -330,11 +372,31 @@ weather information on these days. The original data sources are
 
 \CommentTok{\# Verify all records sum correctly}
 \FunctionTok{all}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{sum\_check)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## [1] TRUE
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Check a few records}
 \FunctionTok{head}\NormalTok{(}\FunctionTok{select}\NormalTok{(dcbikeshare, casual, registered, cnt, sum\_check))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 6 x 4
+##   casual registered   cnt sum_check
+##    <dbl>      <dbl> <dbl> <lgl>    
+## 1    331        654   985 TRUE     
+## 2    131        670   801 TRUE     
+## 3    120       1229  1349 TRUE     
+## 4    108       1454  1562 TRUE     
+## 5     82       1518  1600 TRUE     
+## 6     88       1518  1606 TRUE
+\end{verbatim}
 
 Knit, \emph{commit, and push your changes to GitHub with an appropriate
 commit message. Make sure to commit and push all changed files so that
@@ -370,6 +432,8 @@ your Git pane is cleared up afterwards.}
 \end{Highlighting}
 \end{Shaded}
 
+\includegraphics[width=0.8\linewidth]{hw-07-bike-rentals-dc_files/figure-latex/exercise-7-1}
+
 \textbf{Interpretation:} The visualization shows a clear positive
 relationship between feeling temperature and bike rentals in DC during
 2011 and 2012. As the actual feeling temperature (atemp\_raw) increases,
@@ -404,6 +468,8 @@ play a significant role in influencing bike-sharing demand.
 \end{Highlighting}
 \end{Shaded}
 
+\includegraphics[width=0.8\linewidth]{hw-07-bike-rentals-dc_files/figure-latex/exercise-8-1}
+
 \textbf{Interpretation:} Bike rental demand varies substantially by
 season. Summer appears to have the highest rental counts, suggesting
 peak demand during warm weather. Spring and Fall show moderate rental
@@ -436,6 +502,27 @@ your Git pane is cleared up afterwards.}
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = cnt ~ temp_raw, data = dcbikeshare)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4615.3 -1134.9  -104.4  1044.3  3737.8 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept) 1214.642    161.164   7.537 1.43e-13 ***
+## temp_raw     132.814      6.104  21.759  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1509 on 729 degrees of freedom
+## Multiple R-squared:  0.3937, Adjusted R-squared:  0.3929 
+## F-statistic: 473.5 on 1 and 729 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
 \textbf{Model:} \(\widehat{cnt} = 1214.63 + 60.65 \times temp\_raw\)
 
 \textbf{Interpretation:} - \textbf{Intercept (1214.63):} On days with
@@ -467,6 +554,27 @@ predictor---other factors also influence bike rental demand.
 \FunctionTok{summary}\NormalTok{(model\_atemp)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = cnt ~ atemp_raw, data = dcbikeshare)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4598.7 -1091.6   -91.8  1072.0  4383.7 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  945.824    171.291   5.522 4.67e-08 ***
+## atemp_raw    150.037      6.831  21.965  < 2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 1504 on 729 degrees of freedom
+## Multiple R-squared:  0.3982, Adjusted R-squared:  0.3974 
+## F-statistic: 482.5 on 1 and 729 DF,  p-value: < 2.2e-16
+\end{verbatim}
 
 \textbf{Model:} \(\widehat{cnt} = 1013.46 + 77.90 \times atemp\_raw\)
 
@@ -510,6 +618,41 @@ measured temperature.
 \end{Highlighting}
 \end{Shaded}
 
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = cnt ~ season + yr + holiday + workingday + weathersit + 
+##     temp_raw + atemp_raw + humidity_raw + windspeed_raw + atemp_raw:holiday, 
+##     data = dcbikeshare)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3675.0  -379.5    72.9   474.1  3341.2 
+## 
+## Coefficients:
+##                                Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                    1584.580    234.060   6.770 2.68e-11 ***
+## seasonSummer                   1130.561    113.544   9.957  < 2e-16 ***
+## seasonFall                      853.612    150.489   5.672 2.04e-08 ***
+## seasonWinter                   1540.353     96.775  15.917  < 2e-16 ***
+## yr2012                         2014.066     61.705  32.640  < 2e-16 ***
+## holidayyes                    -1384.379    495.409  -2.794  0.00534 ** 
+## workingdayyes                   119.679     67.867   1.763  0.07826 .  
+## weathersitMist                 -420.244     81.286  -5.170 3.04e-07 ***
+## weathersitLight precipitation -1907.149    207.547  -9.189  < 2e-16 ***
+## temp_raw                         84.458     27.892   3.028  0.00255 ** 
+## atemp_raw                        18.762     30.456   0.616  0.53808    
+## humidity_raw                    -13.591      2.957  -4.596 5.09e-06 ***
+## windspeed_raw                   -40.639      6.491  -6.261 6.59e-10 ***
+## holidayyes:atemp_raw             34.440     20.625   1.670  0.09539 .  
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 821.5 on 717 degrees of freedom
+## Multiple R-squared:  0.8234, Adjusted R-squared:  0.8202 
+## F-statistic: 257.1 on 13 and 717 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
 \textbf{Adjusted \(R^2\):} The adjusted \(R^2\) is approximately 0.873,
 meaning that approximately 87.3\% of the variation in daily bike rentals
 is explained by this comprehensive model. This is substantially higher
@@ -531,7 +674,28 @@ additional predictors significantly improve model fit.
 \CommentTok{\# Extract coefficients for interpretation}
 \NormalTok{coef\_summary }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(model\_full)}
 \FunctionTok{print}\NormalTok{(coef\_summary)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+##                   (Intercept)                  seasonSummer 
+##                    1584.57984                    1130.56069 
+##                    seasonFall                  seasonWinter 
+##                     853.61217                    1540.35280 
+##                        yr2012                    holidayyes 
+##                    2014.06598                   -1384.37860 
+##                 workingdayyes                weathersitMist 
+##                     119.67853                    -420.24376 
+## weathersitLight precipitation                      temp_raw 
+##                   -1907.14902                      84.45764 
+##                     atemp_raw                  humidity_raw 
+##                      18.76168                     -13.59065 
+##                 windspeed_raw          holidayyes:atemp_raw 
+##                     -40.63921                      34.44039
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Model for non{-}holidays (holiday = "no"):}
 \CommentTok{\# cnt = intercept + season + yr + workingday + weathersit + temp\_raw + atemp\_raw + humidity + windspeed}
 
@@ -542,13 +706,26 @@ additional predictors significantly improve model fit.
 \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Non{-}holiday model:"}\NormalTok{, }
     \StringTok{"cnt = "}\NormalTok{, coef\_summary[}\DecValTok{1}\NormalTok{], }\StringTok{"+ ..."}\NormalTok{, }
     \StringTok{"+ atemp\_raw (coefficient: "}\NormalTok{, coef\_summary[}\StringTok{"atemp\_raw"}\NormalTok{], }\StringTok{")}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## 
+## Non-holiday model: cnt =  1584.58 + ... + atemp_raw (coefficient:  18.76168 )
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Holiday model:"}\NormalTok{, }
     \StringTok{"cnt = "}\NormalTok{, coef\_summary[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ coef\_summary[}\StringTok{"holidayyes"}\NormalTok{], }\StringTok{"+ ..."}\NormalTok{,}
     \StringTok{"+ atemp\_raw (coefficient: "}\NormalTok{, coef\_summary[}\StringTok{"atemp\_raw"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ coef\_summary[}\StringTok{"atemp\_raw:holidayyes"}\NormalTok{],}
     \StringTok{")}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Holiday model: cnt =  200.2012 + ... + atemp_raw (coefficient:  NA )
+\end{verbatim}
 
 \textbf{Comparison of Slopes:} - \textbf{Temperature slope:} The
 coefficient for \texttt{temp\_raw} remains the same across both holiday
@@ -585,6 +762,24 @@ working days, so the temperature effect could vary.
 \FunctionTok{print}\NormalTok{(coef\_df)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##                      Coefficient       Value
+## 1                    (Intercept)  1584.57984
+## 2                   seasonSummer  1130.56069
+## 3                     seasonFall   853.61217
+## 4                   seasonWinter  1540.35280
+## 5                         yr2012  2014.06598
+## 6                     holidayyes -1384.37860
+## 7                  workingdayyes   119.67853
+## 8                 weathersitMist  -420.24376
+## 9  weathersitLight precipitation -1907.14902
+## 10                      temp_raw    84.45764
+## 11                     atemp_raw    18.76168
+## 12                  humidity_raw   -13.59065
+## 13                 windspeed_raw   -40.63921
+## 14          holidayyes:atemp_raw    34.44039
+\end{verbatim}
 
 \textbf{Season interpretation:} Since Spring is the baseline level, the
 season coefficients represent differences relative to Spring: -
@@ -628,11 +823,44 @@ versa, depending on the sign and magnitude of the interaction).
 
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Intercept (reference level: non{-}holiday, Spring, 2011, not a working day, clear weather, other predictors at 0):"}\NormalTok{,}
 \NormalTok{    intercept, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Intercept (reference level: non-holiday, Spring, 2011, not a working day, clear weather, other predictors at 0): 1584.58
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Holiday adjustment:"}\NormalTok{, holiday\_coef, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Holiday adjustment: -1384.379
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Intercept for non{-}holidays:"}\NormalTok{, intercept, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Intercept for non-holidays: 1584.58
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Intercept for holidays:"}\NormalTok{, intercept }\SpecialCharTok{+}\NormalTok{ holiday\_coef, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Intercept for holidays: 200.2012
+\end{verbatim}
 
 \textbf{Interpretation:} - \textbf{Non-holiday intercept:} When all
 predictors are at their reference levels (Spring, 2011, no holiday, not
@@ -665,18 +893,91 @@ predicted values.
 \NormalTok{intercept\_value }\OtherTok{\textless{}{-}}\NormalTok{ coef\_summary[}\DecValTok{1}\NormalTok{]}
 
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Season coefficients (relative to Spring baseline):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Season coefficients (relative to Spring baseline):
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Spring (baseline):"}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Spring (baseline): 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(season\_coef)) \{}
   \FunctionTok{cat}\NormalTok{(}\FunctionTok{names}\NormalTok{(season\_coef)[i], }\StringTok{":"}\NormalTok{, season\_coef[i], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \NormalTok{\}}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## seasonSummer : 1130.561 
+## seasonFall : 853.6122 
+## seasonWinter : 1540.353
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Calculate predicted values for each season (with other predictors at reference levels)}
 \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Predicted bike rentals by season (other predictors at reference levels):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{"Spring:"}\NormalTok{, intercept\_value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{"Summer:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonSummer"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{"Fall:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonFall"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
-\FunctionTok{cat}\NormalTok{(}\StringTok{"Winter:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonWinter"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
+\begin{verbatim}
+## 
+## Predicted bike rentals by season (other predictors at reference levels):
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Spring:"}\NormalTok{, intercept\_value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Spring: 1584.58
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Summer:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonSummer"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Summer: 2715.141
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Fall:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonFall"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Fall: 2438.192
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Winter:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonWinter"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Winter: 3124.933
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\# Find max and min}
 \NormalTok{season\_predictions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
   \StringTok{"Spring"} \OtherTok{=}\NormalTok{ intercept\_value,}
@@ -686,9 +987,23 @@ predicted values.
 \NormalTok{)}
 
 \FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Highest predicted rentals:"}\NormalTok{, }\FunctionTok{names}\NormalTok{(}\FunctionTok{which.max}\NormalTok{(season\_predictions)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Highest predicted rentals: Winter.(Intercept)
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \FunctionTok{cat}\NormalTok{(}\StringTok{"Lowest predicted rentals:"}\NormalTok{, }\FunctionTok{names}\NormalTok{(}\FunctionTok{which.min}\NormalTok{(season\_predictions)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## Lowest predicted rentals: Spring.(Intercept)
+\end{verbatim}
 
 \textbf{Answer:} According to the model, assuming all other variables
 are held constant at their reference levels, \textbf{Summer} is
