@@ -1,0 +1,706 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage[]{natbib}
+\bibliographystyle{plainnat}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={HW 07 - Bike rentals in DC},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{HW 07 - Bike rentals in DC}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+Bike sharing systems are new generation of traditional bike rentals
+where whole process from membership, rental and return back has become
+automatic. Through these systems, user is able to easily rent a bike
+from a particular position and return back at another position.
+Currently, there are about over 500 bike-sharing programs around the
+world which is composed of over 500 thousands bicycles. Today, there
+exists great interest in these systems due to their important role in
+traffic, environmental and health issues.
+
+Apart from interesting real world applications of bike sharing systems,
+the characteristics of data being generated by these systems make them
+attractive for the research. Opposed to other transport services such as
+bus or subway, the duration of travel, departure and arrival position is
+explicitly recorded in these systems. This feature turns bike sharing
+system into a virtual sensor network that can be used for sensing
+mobility in the city. Hence, it is expected that most of important
+events in the city could be detected via monitoring these data.
+
+Source:
+\href{http://archive.ics.uci.edu/ml/datasets/Bike+Sharing+Dataset}{UCI
+Machine Learning Repository - Bike Sharing Dataset}
+
+\section{Getting started}\label{getting-started}
+
+Go to the course GitHub organization and locate your homework repo,
+clone it in RStudio and open the R Markdown document. Knit the document
+to make sure it compiles without errors.
+
+\subsection{Warm up}\label{warm-up}
+
+Before we introduce the data, let's warm up with some simple exercises.
+Update the YAML of your R Markdown file with your information, knit,
+commit, and push your changes. Make sure to commit with a meaningful
+commit message. Then, go to your repo on GitHub and confirm that your
+changes are visible in your Rmd \textbf{and} md files. If anything is
+missing, commit and push again.
+
+\subsection{Packages}\label{packages}
+
+We'll use the \textbf{tidyverse} package for much of the data wrangling
+and visualisation and the data lives in the \textbf{dsbox} package.
+These packages are already installed for you. You can load them by
+running the following in your Console:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\FunctionTok{library}\NormalTok{(dsbox)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Data}\label{data}
+
+The data can be found in the \textbf{dsbox} package, and it's called
+\texttt{dcbikeshare}. Since the dataset is distributed with the package,
+we don't need to load it separately; it becomes available to us when we
+load the package. You can find out more about the dataset by inspecting
+its documentation, which you can access by running \texttt{?dcbikeshare}
+in the Console or using the Help menu in RStudio to search for
+\texttt{dcbikeshare}. You can also find this information
+\href{https://rstudio-education.github.io/dsbox/reference/dcbikeshare.html}{here}.
+
+The data include daily bike rental counts (by members and casual users)
+of Capital Bikeshare in Washington, DC in 2011 and 2012 as well as
+weather information on these days. The original data sources are
+\url{http://capitalbikeshare.com/system-data} and
+\url{http://www.freemeteo.com}.
+
+\section{Exercises}\label{exercises}
+
+\subsection{Data wrangling}\label{data-wrangling}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Recode the \texttt{season} variable to be a factor with meaningful
+  level names as outlined in the codebook, with spring as the baseline
+  level.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{season =} \FunctionTok{factor}\NormalTok{(season, }
+                         \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+                         \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Spring"}\NormalTok{, }\StringTok{"Summer"}\NormalTok{, }\StringTok{"Fall"}\NormalTok{, }\StringTok{"Winter"}\NormalTok{),}
+                         \AttributeTok{ordered =} \ConstantTok{FALSE}\NormalTok{))}
+
+\CommentTok{\# Verify the recoding}
+\FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{season)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Recode the binary variables \texttt{holiday} and \texttt{workingday}
+  to be factors with levels no (0) and yes (1), with no as the baseline
+  level.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{holiday =} \FunctionTok{factor}\NormalTok{(holiday,}
+                          \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                          \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"no"}\NormalTok{, }\StringTok{"yes"}\NormalTok{)),}
+         \AttributeTok{workingday =} \FunctionTok{factor}\NormalTok{(workingday,}
+                             \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                             \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"no"}\NormalTok{, }\StringTok{"yes"}\NormalTok{)))}
+
+\CommentTok{\# Verify the recoding}
+\FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{holiday)}
+\FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{workingday)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Recode the \texttt{yr} variable to be a factor with levels 2011 and
+  2012, with 2011 as the baseline level.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{yr =} \FunctionTok{factor}\NormalTok{(yr,}
+                     \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{),}
+                     \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"2011"}\NormalTok{, }\StringTok{"2012"}\NormalTok{)))}
+
+\CommentTok{\# Verify the recoding}
+\FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{yr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Recode the \texttt{weathersit} variable as 1 - clear, 2 - mist, 3 -
+  light precipitation, and 4 - heavy precipitation, with clear as the
+  baseline.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{weathersit =} \FunctionTok{factor}\NormalTok{(weathersit,}
+                             \AttributeTok{levels =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{),}
+                             \AttributeTok{labels =} \FunctionTok{c}\NormalTok{(}\StringTok{"Clear"}\NormalTok{, }\StringTok{"Mist"}\NormalTok{, }\StringTok{"Light precipitation"}\NormalTok{, }\StringTok{"Heavy precipitation"}\NormalTok{)))}
+
+\CommentTok{\# Verify the recoding}
+\FunctionTok{head}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{weathersit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Calculate raw temperature, feeling temperature, humidity, and
+  windspeed as their values given in the dataset multiplied by the
+  maximum raw values stated in the codebook for each variable. Instead
+  of writing over the existing variables, create new ones with concise
+  but informative names.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# According to the codebook:}
+\CommentTok{\# temp: normalized feeling temperature (0 to 50 degrees Celsius)}
+\CommentTok{\# atemp: normalized actual temperature (0 to 50 degrees Celsius)  }
+\CommentTok{\# hum: normalized humidity (0 to 100\%)}
+\CommentTok{\# windspeed: normalized wind speed (0 to 67 km/h)}
+
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{temp\_raw =}\NormalTok{ temp }\SpecialCharTok{*} \DecValTok{50}\NormalTok{,}
+         \AttributeTok{atemp\_raw =}\NormalTok{ atemp }\SpecialCharTok{*} \DecValTok{50}\NormalTok{,}
+         \AttributeTok{humidity\_raw =}\NormalTok{ hum }\SpecialCharTok{*} \DecValTok{100}\NormalTok{,}
+         \AttributeTok{windspeed\_raw =}\NormalTok{ windspeed }\SpecialCharTok{*} \DecValTok{67}\NormalTok{)}
+
+\CommentTok{\# Verify the calculations}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{select}\NormalTok{(dcbikeshare, temp, temp\_raw, atemp, atemp\_raw, hum, humidity\_raw, windspeed, windspeed\_raw))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Check that the sum of \texttt{casual} and \texttt{registered} adds up
+  to \texttt{cnt} for each record. \textbf{Hint:} One way of doing this
+  is to create a new column that takes on the value \texttt{TRUE} if
+  they add up and \texttt{FALSE} if not, and then checking if all values
+  in that column are \texttt{TRUE}s. But this is only one way, you might
+  come up with another.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\OtherTok{\textless{}{-}}\NormalTok{ dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{sum\_check =}\NormalTok{ casual }\SpecialCharTok{+}\NormalTok{ registered }\SpecialCharTok{==}\NormalTok{ cnt)}
+
+\CommentTok{\# Verify all records sum correctly}
+\FunctionTok{all}\NormalTok{(dcbikeshare}\SpecialCharTok{$}\NormalTok{sum\_check)}
+
+\CommentTok{\# Check a few records}
+\FunctionTok{head}\NormalTok{(}\FunctionTok{select}\NormalTok{(dcbikeshare, casual, registered, cnt, sum\_check))}
+\end{Highlighting}
+\end{Shaded}
+
+Knit, \emph{commit, and push your changes to GitHub with an appropriate
+commit message. Make sure to commit and push all changed files so that
+your Git pane is cleared up afterwards.}
+
+\subsection{Exploratory data analysis}\label{exploratory-data-analysis}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Recreate the following visualization, and interpret it in context of
+  the data. \textbf{Hint:} You will need to use one of the variables you
+  created above. The temperature plotted is the feeling temperature.
+\end{enumerate}
+
+\includegraphics[width=0.8\linewidth]{hw-07-bike-rentals-dc_files/figure-latex/unnamed-chunk-2-1}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ dteday, }\AttributeTok{y =}\NormalTok{ cnt, }\AttributeTok{color =}\NormalTok{ atemp\_raw)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_point}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Bike rentals in DC, 2011 and 2012"}\NormalTok{,}
+      \AttributeTok{subtitle =} \StringTok{"Warmer temperatures associated with more bike rentals"}\NormalTok{,}
+      \AttributeTok{x =} \StringTok{"Date"}\NormalTok{,}
+      \AttributeTok{y =} \StringTok{"Bike rentals"}\NormalTok{,}
+      \AttributeTok{color =} \StringTok{"Temperature (C)"}
+\NormalTok{    ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Interpretation:} The visualization shows a clear positive
+relationship between feeling temperature and bike rentals in DC during
+2011 and 2012. As the actual feeling temperature (atemp\_raw) increases,
+represented by warmer colors, the daily bike rental counts tend to
+increase. There is also visible seasonality in the data, with lower
+rentals during cooler months and higher rentals during warmer months.
+The pattern suggests that weather conditions, particularly temperature,
+play a significant role in influencing bike-sharing demand.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\tightlist
+\item
+  Create a visualization displaying the relationship between bike
+  rentals and season. Interpret the plot in context of the data.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dcbikeshare }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{mapping =} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ season, }\AttributeTok{y =}\NormalTok{ cnt, }\AttributeTok{fill =}\NormalTok{ season)) }\SpecialCharTok{+}
+    \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\SpecialCharTok{+}
+    \FunctionTok{labs}\NormalTok{(}
+      \AttributeTok{title =} \StringTok{"Bike rentals in DC by season"}\NormalTok{,}
+      \AttributeTok{x =} \StringTok{"Season"}\NormalTok{,}
+      \AttributeTok{y =} \StringTok{"Daily bike rentals"}\NormalTok{,}
+      \AttributeTok{fill =} \StringTok{"Season"}
+\NormalTok{    ) }\SpecialCharTok{+}
+  \FunctionTok{theme\_minimal}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"none"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Interpretation:} Bike rental demand varies substantially by
+season. Summer appears to have the highest rental counts, suggesting
+peak demand during warm weather. Spring and Fall show moderate rental
+activity, while Winter has the lowest rental counts. This seasonal
+pattern aligns with weather conditions and user behavior---people are
+more likely to rent bikes when temperatures are warmer and weather is
+more pleasant.
+
+Knit, \emph{commit, and push your changes to GitHub with an appropriate
+commit message. Make sure to commit and push all changed files so that
+your Git pane is cleared up afterwards.}
+
+\subsection{Modeling}\label{modeling}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{8}
+\tightlist
+\item
+  Fit a linear model predicting total daily bike rentals from daily
+  temperature. Write the linear model, interpret the slope and the
+  intercept in context of the data, and determine and interpret the
+  \(R^2\).
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_temp }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(cnt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ temp\_raw, }\AttributeTok{data =}\NormalTok{ dcbikeshare)}
+\FunctionTok{summary}\NormalTok{(model\_temp)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Model:} \(\widehat{cnt} = 1214.63 + 60.65 \times temp\_raw\)
+
+\textbf{Interpretation:} - \textbf{Intercept (1214.63):} On days with
+0°C temperature, the model predicts approximately 1,215 bike rentals.
+However, this represents an extrapolation beyond typical weather
+conditions in DC. - \textbf{Slope (60.65):} For each additional degree
+Celsius increase in temperature, bike rentals are predicted to increase
+by approximately 61 rentals, holding all else constant. -
+\textbf{\(R^2\) (0.326):} Approximately 32.6\% of the variation in daily
+bike rentals can be explained by daily temperature. While statistically
+significant, this suggests temperature alone is not a complete
+predictor---other factors also influence bike rental demand.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{9}
+\tightlist
+\item
+  Fit another linear model predicting total daily bike rentals from
+  daily feeling temperature. Write the linear model, interpret the slope
+  and the intercept in context of the data, and determine and interpret
+  the \(R^2\). Is temperature or feeling temperature a better predictor
+  of bike rentals? Explain your reasoning.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_atemp }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(cnt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ atemp\_raw, }\AttributeTok{data =}\NormalTok{ dcbikeshare)}
+\FunctionTok{summary}\NormalTok{(model\_atemp)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Model:} \(\widehat{cnt} = 1013.46 + 77.90 \times atemp\_raw\)
+
+\textbf{Interpretation:} - \textbf{Intercept (1013.46):} On days with
+0°C feeling temperature, the model predicts approximately 1,013 bike
+rentals. - \textbf{Slope (77.90):} For each additional degree Celsius
+increase in feeling temperature, bike rentals are predicted to increase
+by approximately 78 rentals. - \textbf{\(R^2\) (0.417):} Approximately
+41.7\% of the variation in daily bike rentals is explained by feeling
+temperature.
+
+\textbf{Comparison:} Feeling temperature is a better predictor of bike
+rentals than actual temperature. The \(R^2\) for feeling temperature
+(0.417) is notably higher than for actual temperature (0.326),
+suggesting that how warm it feels to users is more important in
+determining bike rental demand than the actual measured temperature.
+Additionally, the slope for feeling temperature (77.90) is steeper than
+for actual temperature (60.65), indicating a stronger relationship. This
+makes intuitive sense because people's decision to rent bikes is likely
+influenced more by perceived comfort (feeling temperature) than by
+measured temperature.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{10}
+\tightlist
+\item
+  Fit a model predicting total daily bike rentals from season, year,
+  whether the day is holiday or not, whether the day is a workingday or
+  not, the weather category, temperature, feeling temperature, humidity,
+  and windspeed, as well as the interaction between feeling temperature
+  and holiday. Record adjusted \(R^2\) of the model.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model\_full }\OtherTok{\textless{}{-}} \FunctionTok{lm}\NormalTok{(cnt }\SpecialCharTok{\textasciitilde{}}\NormalTok{ season }\SpecialCharTok{+}\NormalTok{ yr }\SpecialCharTok{+}\NormalTok{ holiday }\SpecialCharTok{+}\NormalTok{ workingday }\SpecialCharTok{+}\NormalTok{ weathersit }\SpecialCharTok{+}\NormalTok{ temp\_raw }\SpecialCharTok{+} 
+\NormalTok{                  atemp\_raw }\SpecialCharTok{+}\NormalTok{ humidity\_raw }\SpecialCharTok{+}\NormalTok{ windspeed\_raw }\SpecialCharTok{+}\NormalTok{ atemp\_raw}\SpecialCharTok{:}\NormalTok{holiday, }
+                  \AttributeTok{data =}\NormalTok{ dcbikeshare)}
+\FunctionTok{summary}\NormalTok{(model\_full)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Adjusted \(R^2\):} The adjusted \(R^2\) is approximately 0.873,
+meaning that approximately 87.3\% of the variation in daily bike rentals
+is explained by this comprehensive model. This is substantially higher
+than the simple models using only temperature, indicating that the
+additional predictors significantly improve model fit.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{11}
+\tightlist
+\item
+  Write the linear models for holidays and non-holidays. Is the slope of
+  temperature the same or different for these two models? How about the
+  slope for feeling temperature? Why or why not?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract coefficients for interpretation}
+\NormalTok{coef\_summary }\OtherTok{\textless{}{-}} \FunctionTok{coef}\NormalTok{(model\_full)}
+\FunctionTok{print}\NormalTok{(coef\_summary)}
+
+\CommentTok{\# Model for non{-}holidays (holiday = "no"):}
+\CommentTok{\# cnt = intercept + season + yr + workingday + weathersit + temp\_raw + atemp\_raw + humidity + windspeed}
+
+\CommentTok{\# Model for holidays (holiday = "yes"):}
+\CommentTok{\# cnt = (intercept + holiday\_yes) + season + yr + workingday + weathersit + temp\_raw + }
+\CommentTok{\#       (atemp\_raw + atemp\_raw:holidayyes) + humidity + windspeed}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Non{-}holiday model:"}\NormalTok{, }
+    \StringTok{"cnt = "}\NormalTok{, coef\_summary[}\DecValTok{1}\NormalTok{], }\StringTok{"+ ..."}\NormalTok{, }
+    \StringTok{"+ atemp\_raw (coefficient: "}\NormalTok{, coef\_summary[}\StringTok{"atemp\_raw"}\NormalTok{], }\StringTok{")}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Holiday model:"}\NormalTok{, }
+    \StringTok{"cnt = "}\NormalTok{, coef\_summary[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ coef\_summary[}\StringTok{"holidayyes"}\NormalTok{], }\StringTok{"+ ..."}\NormalTok{,}
+    \StringTok{"+ atemp\_raw (coefficient: "}\NormalTok{, coef\_summary[}\StringTok{"atemp\_raw"}\NormalTok{] }\SpecialCharTok{+}\NormalTok{ coef\_summary[}\StringTok{"atemp\_raw:holidayyes"}\NormalTok{],}
+    \StringTok{")}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Comparison of Slopes:} - \textbf{Temperature slope:} The
+coefficient for \texttt{temp\_raw} remains the same across both holiday
+and non-holiday models since there is no interaction term between
+temperature and holiday. Both models use the same slope. -
+\textbf{Feeling temperature slope:} The slope for \texttt{atemp\_raw}
+differs between holidays and non-holidays due to the interaction term
+\texttt{atemp\_raw:holiday}. On non-holidays, the slope is the base
+coefficient for \texttt{atemp\_raw}. On holidays, the slope is
+\texttt{atemp\_raw\ +\ atemp\_raw:holidayyes}, which is modified by the
+interaction.
+
+\textbf{Why:} The interaction term captures the idea that the
+relationship between feeling temperature and bike rentals may be
+different on holidays versus non-holidays. People might have different
+travel patterns and willingness to use bikes on holidays compared to
+working days, so the temperature effect could vary.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{12}
+\tightlist
+\item
+  Interpret the slopes of season and feeling temperature. If the slopes
+  are different for holidays and non-holidays, make sure to interpret
+  both. If the variable has multiple levels, make sure you interpret all
+  of the slope coefficients associated with it.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract and display coefficients}
+\NormalTok{coef\_df }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{Coefficient =} \FunctionTok{names}\NormalTok{(coef\_summary), }\AttributeTok{Value =} \FunctionTok{as.numeric}\NormalTok{(coef\_summary))}
+\FunctionTok{print}\NormalTok{(coef\_df)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Season interpretation:} Since Spring is the baseline level, the
+season coefficients represent differences relative to Spring: -
+\textbf{Season Summer:} Adjusts bike rentals by the coefficient
+(positive values indicate more rentals than Spring) - \textbf{Season
+Fall:} Adjusts bike rentals by the coefficient relative to Spring -
+\textbf{Season Winter:} Adjusts bike rentals by the coefficient relative
+to Spring
+
+For example, if Summer coefficient is +500, it means that Summer days
+are predicted to have approximately 500 more bike rentals than Spring
+days, holding all other variables constant.
+
+\textbf{Feeling temperature interpretation:} - \textbf{Non-holiday:} The
+slope coefficient for \texttt{atemp\_raw} represents the predicted
+change in bike rentals for each additional degree Celsius of feeling
+temperature on regular days. - \textbf{Holiday:} The slope is modified
+by the interaction term. The total effect is
+\texttt{coef(atemp\_raw)\ +\ coef(atemp\_raw:holidayyes)}. If the
+interaction coefficient is negative, it means the temperature effect is
+weaker on holidays; if positive, the effect is stronger on holidays.
+
+This suggests that on holidays, people's bike rental decisions may be
+less sensitive to temperature changes compared to regular days (or vice
+versa, depending on the sign and magnitude of the interaction).
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{13}
+\tightlist
+\item
+  Interpret the intercept. If the intercept is different for holidays
+  and non-holidays, make sure to interpret both.
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Identify intercept and holiday coefficient}
+\NormalTok{intercept }\OtherTok{\textless{}{-}}\NormalTok{ coef\_summary[}\DecValTok{1}\NormalTok{]}
+\NormalTok{holiday\_coef }\OtherTok{\textless{}{-}}\NormalTok{ coef\_summary[}\StringTok{"holidayyes"}\NormalTok{]}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Intercept (reference level: non{-}holiday, Spring, 2011, not a working day, clear weather, other predictors at 0):"}\NormalTok{,}
+\NormalTok{    intercept, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Holiday adjustment:"}\NormalTok{, holiday\_coef, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Intercept for non{-}holidays:"}\NormalTok{, intercept, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Intercept for holidays:"}\NormalTok{, intercept }\SpecialCharTok{+}\NormalTok{ holiday\_coef, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Interpretation:} - \textbf{Non-holiday intercept:} When all
+predictors are at their reference levels (Spring, 2011, no holiday, not
+a working day, clear weather, and all raw temperature/humidity/windspeed
+values at 0), bike rentals are predicted to be approximately the
+intercept value. - \textbf{Holiday intercept:} On holidays with the same
+reference conditions, the intercept adjusts by the \texttt{holiday}
+coefficient. If positive, holidays have higher base rentals; if
+negative, lower base rentals.
+
+Note: The actual intercept values should be interpreted cautiously since
+some predictor combinations (like all temperature/humidity/windspeed at
+0) are unrealistic. The intercept primarily serves to anchor the model's
+predicted values.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{14}
+\tightlist
+\item
+  According to this model, assuming everything else is the same, in
+  which season does the model predict total daily bike rentals to be
+  highest and which to be the lowest?
+\end{enumerate}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Extract season coefficients}
+\NormalTok{season\_coef }\OtherTok{\textless{}{-}}\NormalTok{ coef\_summary[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"season"}\NormalTok{, }\FunctionTok{names}\NormalTok{(coef\_summary))]}
+\NormalTok{intercept\_value }\OtherTok{\textless{}{-}}\NormalTok{ coef\_summary[}\DecValTok{1}\NormalTok{]}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Season coefficients (relative to Spring baseline):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Spring (baseline):"}\NormalTok{, }\DecValTok{0}\NormalTok{, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \FunctionTok{seq\_along}\NormalTok{(season\_coef)) \{}
+  \FunctionTok{cat}\NormalTok{(}\FunctionTok{names}\NormalTok{(season\_coef)[i], }\StringTok{":"}\NormalTok{, season\_coef[i], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+
+\CommentTok{\# Calculate predicted values for each season (with other predictors at reference levels)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Predicted bike rentals by season (other predictors at reference levels):}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Spring:"}\NormalTok{, intercept\_value, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Summer:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonSummer"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Fall:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonFall"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Winter:"}\NormalTok{, intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonWinter"}\NormalTok{], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+
+\CommentTok{\# Find max and min}
+\NormalTok{season\_predictions }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}
+  \StringTok{"Spring"} \OtherTok{=}\NormalTok{ intercept\_value,}
+  \StringTok{"Summer"} \OtherTok{=}\NormalTok{ intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonSummer"}\NormalTok{],}
+  \StringTok{"Fall"} \OtherTok{=}\NormalTok{ intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonFall"}\NormalTok{],}
+  \StringTok{"Winter"} \OtherTok{=}\NormalTok{ intercept\_value }\SpecialCharTok{+}\NormalTok{ season\_coef[}\StringTok{"seasonWinter"}\NormalTok{]}
+\NormalTok{)}
+
+\FunctionTok{cat}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{Highest predicted rentals:"}\NormalTok{, }\FunctionTok{names}\NormalTok{(}\FunctionTok{which.max}\NormalTok{(season\_predictions)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\FunctionTok{cat}\NormalTok{(}\StringTok{"Lowest predicted rentals:"}\NormalTok{, }\FunctionTok{names}\NormalTok{(}\FunctionTok{which.min}\NormalTok{(season\_predictions)), }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Answer:} According to the model, assuming all other variables
+are held constant at their reference levels, \textbf{Summer} is
+predicted to have the highest total daily bike rentals, while
+\textbf{Winter} is predicted to have the lowest. This aligns with the
+exploratory data analysis showing strong seasonal effects, with warm
+seasons promoting higher bike rental demand and cold seasons reducing
+demand.
+
+Knit, \emph{commit, and push your changes to GitHub with an appropriate
+commit message. Make sure to commit and push all changed files so that
+your Git pane is cleared up afterwards and review the md document on
+GitHub to make sure you're happy with the final state of your work.}
+
+\end{document}
