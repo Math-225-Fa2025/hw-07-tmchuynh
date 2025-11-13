@@ -106,6 +106,16 @@ head(dcbikeshare$workingday)
 
 3.  Recode the `yr` variable to be a factor with levels 2011 and 2012, with 2011 as the baseline level.
 
+```{r exercise-3}
+dcbikeshare <- dcbikeshare %>%
+  mutate(yr = factor(yr,
+                     levels = c(0, 1),
+                     labels = c("2011", "2012")))
+
+# Verify the recoding
+head(dcbikeshare$yr)
+```
+
 4.  Recode the `weathersit` variable as 1 - clear, 2 - mist, 3 - light precipitation, and 4 - heavy precipitation, with clear as the baseline.
 
 5.  Calculate raw temperature, feeling temperature, humidity, and windspeed as their values given in the dataset multiplied by the maximum raw values stated in the codebook for each variable.
