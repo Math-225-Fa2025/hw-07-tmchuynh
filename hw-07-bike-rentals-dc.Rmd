@@ -257,6 +257,34 @@ summary(model_full)
     How about the slope for feeling temperature?
     Why or why not?
 
+```{r exercise-12}
+# Extract coefficients for interpretation
+coef_summary <- coef(model_full)
+print(coef_summary)
+
+# Model for non-holidays (holiday = "no"):
+# cnt = intercept + season + yr + workingday + weathersit + temp_raw + atemp_raw + humidity + windspeed
+
+# Model for holidays (holiday = "yes"):
+# cnt = (intercept + holiday_yes) + season + yr + workingday + weathersit + temp_raw + 
+#       (atemp_raw + atemp_raw:holidayyes) + humidity + windspeed
+
+cat("\nNon-holiday model:", 
+    "cnt = ", coef_summary[1], "+ ...", 
+    "+ atemp_raw (coefficient: ", coef_summary["atemp_raw"], ")\n")
+
+cat("Holiday model:", 
+    "cnt = ", coef_summary[1] + coef_summary["holidayyes"], "+ ...",
+    "+ atemp_raw (coefficient: ", coef_summary["atemp_raw"] + coef_summary["atemp_raw:holidayyes"],
+    ")\n")
+```
+
+**Comparison of Slopes:**
+- **Temperature slope:** The coefficient for `temp_raw` remains the same across both holiday and non-holiday models since there is no interaction term between temperature and holiday. Both models use the same slope.
+- **Feeling temperature slope:** The slope for `atemp_raw` differs between holidays and non-holidays due to the interaction term `atemp_raw:holiday`. On non-holidays, the slope is the base coefficient for `atemp_raw`. On holidays, the slope is `atemp_raw + atemp_raw:holidayyes`, which is modified by the interaction.
+
+**Why:** The interaction term captures the idea that the relationship between feeling temperature and bike rentals may be different on holidays versus non-holidays. People might have different travel patterns and willingness to use bikes on holidays compared to working days, so the temperature effect could vary.
+
 13. Interpret the slopes of season and feeling temperature.
     If the slopes are different for holidays and non-holidays, make sure to interpret both.
     If the variable has multiple levels, make sure you interpret all of the slope coefficients associated with it.
